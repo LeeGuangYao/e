@@ -112,11 +112,12 @@ src/
 - **统一封装**：`src/api/index.ts` 导出 `HRequest` 函数
 
   ```ts
+  // 函数式调用（支持全部配置项）
   HRequest({
     url: '/api/user/profile',
     method: 'GET',
-    query?: object,
-    data?: object,
+    params?: object,       // GET 查询参数
+    data?: object,         // POST/PUT 请求体
     headers?: object,
     showLoading?: boolean,
     onlyAcceptTheLatest?: boolean,  // 自动取消同 url 旧请求
@@ -125,16 +126,30 @@ src/
   })
   ```
 
+- **响应结构**：所有接口返回固定结构
+
+  ```ts
+  interface ApiResponse<T> {
+    ResultData: T
+    IsSuccess: boolean
+    ErrorCode: number
+    ErrMsg: string | null
+    RedirectUrl: string | null
+    Version: string | null
+  }
+  ```
+
 - **拦截器职责**：
-  - **请求**：注入 `Token`、`LanguageType`、`CurrencyType`、`SoftwareVersion`、`RequestSource`、`BrowserUrl`
-  - **响应**：判断 `IsSuccess`、统一错误码映射（如 101/102 → 登出、107 → 强制刷新、113 → 强制改密）、Toast 提示
-  - **错误**：取消重复请求时静默；网络错误统一上报
+  - **请求**：注入 `Authorization: Bearer token`、`LanguageType`、`CurrencyType`、`SoftwareVersion`、`RequestSource`、`BrowserUrl`
+  - **响应**：成功时 `return ResultData`（调用层直接拿业务数据）；失败时 `message.error(ErrMsg)` + `Promise.reject`；统一错误码映射（如 101/102 → 登出、107 → 强制刷新、113 → 强制改密）
+  - **错误**：取消重复请求时静默；网络错误 / 超时 / HTTP 状态码异常统一提示
+  - **loading**：`showLoading: true` 时自动展示 / 隐藏 loading toast
 
 - **接口组织**：按业务模块分目录
 
   ```
   api/
-    index.ts             # HRequest 与拦截器
+    index.ts             # HRequest、request 对象与拦截器
     auth/index.ts        # 登录注册
     user/index.ts        # 用户信息
     order/index.ts       # 订单

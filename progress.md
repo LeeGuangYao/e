@@ -11,6 +11,9 @@
 
 - 项目脚手架 → plans/done/2026-05-08-project-scaffold.md（create-vue + 目录结构 + HRequest + i18n + Less + ESLint/Husky + 登录模块示例）
 - 一键发布流程（standard-version + 校验 + CHANGELOG + 自动推送） → plans/done/2026-05-08-auto-release.md
+- 全局接口请求封装 → plans/done/2026-05-08-global-request.md（ApiResponse 结构对齐、Authorization Bearer、loading、登录接口）
+- 移除 request 对象式调用，统一 HRequest → plans/done/2026-05-08-remove-request-object.md
+- 登录页面现代化重构 → plans/done/2026-05-08-login-page.md（左右分屏布局 + 品牌区 + 完整表单校验 + 密码强度条 + 响应式）
 
 ## 🚧 进行中
 

@@ -8,18 +8,21 @@ import { message } from "ant-design-vue"
 import { useUserStore } from "@/stores/useUserStore"
 import router from "@/router"
 
+/** 接口统一返回结构 */
+interface ApiResponse<T = unknown> {
+  ResultData: T
+  IsSuccess: boolean
+  ErrorCode: number
+  ErrMsg: string | null
+  RedirectUrl: string | null
+  Version: string | null
+}
+
 interface HRequestConfig extends AxiosRequestConfig {
   showLoading?: boolean
   onlyAcceptTheLatest?: boolean
   tryTimes?: number
   alwaysPass?: boolean
-}
-
-interface ApiResponse<T = unknown> {
-  IsSuccess: boolean
-  ErrorCode: number
-  ErrorMessage: string
-  Data: T
 }
 
 interface CustomInternalConfig extends InternalAxiosRequestConfig {
@@ -30,6 +33,9 @@ interface CustomInternalConfig extends InternalAxiosRequestConfig {
 }
 
 const pendingRequests = new Map<string, AbortController>()
+
+let loadingCount = 0
+let loadingHide: (() => void) | null = null
 
 function getRequestKey(config: InternalAxiosRequestConfig): string {
   const { method, url } = config
@@ -51,6 +57,22 @@ function removePendingRequest(config: InternalAxiosRequestConfig): void {
   pendingRequests.delete(key)
 }
 
+function showLoadingToast(): void {
+  loadingCount++
+  if (loadingCount === 1) {
+    loadingHide = message.loading("加载中...", 0)
+  }
+}
+
+function hideLoadingToast(): void {
+  loadingCount--
+  if (loadingCount <= 0) {
+    loadingCount = 0
+    loadingHide?.()
+    loadingHide = null
+  }
+}
+
 const service: AxiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL || "/api",
   timeout: 30000,
@@ -66,9 +88,13 @@ service.interceptors.request.use(
       addPendingRequest(config)
     }
 
+    if (customConfig.showLoading) {
+      showLoadingToast()
+    }
+
     const userStore = useUserStore()
     if (userStore.token) {
-      config.headers.set("Token", userStore.token)
+      config.headers.set("Authorization", `Bearer ${userStore.token}`)
     }
 
     config.headers.set("LanguageType", String(userStore.language || "zh"))
@@ -86,16 +112,20 @@ service.interceptors.request.use(
 
 service.interceptors.response.use(
   (response: AxiosResponse<ApiResponse>) => {
+    const customConfig = response.config as CustomInternalConfig
+    if (customConfig.showLoading) {
+      hideLoadingToast()
+    }
+
     removePendingRequest(response.config as InternalAxiosRequestConfig)
 
     const { data } = response
-    const customConfig = response.config as CustomInternalConfig
 
     if (data.IsSuccess) {
-      return data.Data as unknown as AxiosResponse
+      return data.ResultData as unknown as AxiosResponse
     }
 
-    handleBusinessError(data.ErrorCode, data.ErrorMessage)
+    handleBusinessError(data.ErrorCode, data.ErrMsg || undefined)
 
     if (customConfig.alwaysPass) {
       return data as unknown as AxiosResponse
@@ -104,11 +134,15 @@ service.interceptors.response.use(
     return Promise.reject(data)
   },
   (error) => {
+    const config = error.config as CustomInternalConfig | undefined
+    if (config?.showLoading) {
+      hideLoadingToast()
+    }
+
     if (axios.isCancel(error)) {
       return Promise.reject(error)
     }
 
-    const config = error.config as CustomInternalConfig | undefined
     if (config) {
       removePendingRequest(config as InternalAxiosRequestConfig)
     }
@@ -121,6 +155,8 @@ service.interceptors.response.use(
       handleLogout()
     } else if (error.response?.status === 403) {
       message.error("没有权限访问该资源")
+    } else if (error.response?.status) {
+      message.error(`请求异常（${error.response.status}）`)
     } else {
       message.error(error.message || "请求失败")
     }
@@ -133,7 +169,8 @@ service.interceptors.response.use(
   },
 )
 
-function handleBusinessError(errorCode: number, errorMessage: string): void {
+// NOTE: 101=Token 失效, 102=登录被踢, 107=客户端版本过期需强刷, 113=强制改密
+function handleBusinessError(errorCode: number, errMsg?: string): void {
   switch (errorCode) {
     case 101:
     case 102:
@@ -148,7 +185,7 @@ function handleBusinessError(errorCode: number, errorMessage: string): void {
       router.push("/user/change-password")
       break
     default:
-      message.error(errorMessage || "操作失败")
+      message.error(errMsg || "操作失败")
       break
   }
 }
@@ -179,6 +216,7 @@ async function retryRequest<T>(config: HRequestConfig, resolve: (value: T) => vo
   reject(lastError)
 }
 
+/** 函数式调用，支持全部配置项 */
 export function HRequest<T = unknown>(config: HRequestConfig): Promise<T> {
   if (config.tryTimes && config.tryTimes > 0) {
     return new Promise<T>((resolve, reject) => {
@@ -188,5 +226,7 @@ export function HRequest<T = unknown>(config: HRequestConfig): Promise<T> {
 
   return service(config) as Promise<T>
 }
+
+
 
 export default service

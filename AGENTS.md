@@ -16,7 +16,7 @@
 
 读完后，必须用一句话向用户确认，格式如下：
 
-> 已加载世界观：技术栈 [一句话简述]，已知决策 N 条，当前进度 [一句话简述正在做的事]。
+> 已加载世界观：技术栈 [一句话简述]，已知决策 N 条，待办任务 [一句话简述待做未完成的任务或计划]。
 
 **未输出此确认句，不得开始任何编码、规划或讨论实现细节的工作。**
 
@@ -91,7 +91,7 @@
 
 | 触发事件 | 必须更新 |
 |---|---|
-| 完成一个 plan | `plans/<plan>` → `plans/done/`；`specs/<spec>` → `specs/done/`；更新 `progress.md` |
+| 完成一个 plan | `plans/<plan>` → `plans/done/`；`specs/<spec>` → `specs/done/`；更新 `progress.md`；在 plan 中填写 `## 改动总结`（列出实际改动的文件及说明） |
 | 修改架构 / 规则 / 目录 / 依赖 / 命名约定 | `architecture/project.md` 对应章节 |
 | 做出技术选型或架构方案决策 | 新建 `decisions/NNNN-*.md`；更新 `decisions/README.md` |
 | 新增 / 废弃功能模块 | `progress.md` |
