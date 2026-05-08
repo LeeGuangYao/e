@@ -26,7 +26,7 @@ const zh = {
     passwordPlaceholder: "请输入密码",
     passwordRequired: "请输入密码",
     passwordMinLength: "密码长度不能少于 8 位",
-    passwordComplexity: "密码必须包含大小写字母和数字",
+    passwordComplexity: "密码必须包含小写字母和数字",
     passwordWeak: "密码强度过低",
     passwordStrengthWeak: "弱",
     passwordStrengthMedium: "中",
@@ -49,6 +49,10 @@ const zh = {
     profile: "个人中心",
     logout: "退出登录",
     changePassword: "修改密码",
+  },
+  home: {
+    title: "首页",
+    welcome: "欢迎使用商旅管理平台",
   },
 }
 

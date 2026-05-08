@@ -3,15 +3,17 @@ import { useUserStore } from "@/stores/useUserStore"
 import { $t } from "@/i18n"
 import loginRoutes from "./loginRoute"
 import userRoutes from "./userRoute"
+import homeRoutes from "./homeRoute"
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     ...loginRoutes,
     ...userRoutes,
+    ...homeRoutes,
     {
       path: "/",
-      redirect: "/login",
+      redirect: "/home",
     },
   ],
 })

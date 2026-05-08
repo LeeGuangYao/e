@@ -28,7 +28,7 @@ const en: LocaleMessages = {
     passwordPlaceholder: "Please enter your password",
     passwordRequired: "Please enter your password",
     passwordMinLength: "Password must be at least 8 characters",
-    passwordComplexity: "Password must contain uppercase, lowercase and numbers",
+    passwordComplexity: "Password must contain lowercase and numbers",
     passwordWeak: "Password is too weak",
     passwordStrengthWeak: "Weak",
     passwordStrengthMedium: "Medium",
@@ -51,6 +51,10 @@ const en: LocaleMessages = {
     profile: "Profile",
     logout: "Logout",
     changePassword: "Change Password",
+  },
+  home: {
+    title: "Home",
+    welcome: "Welcome to Business Travel Platform",
   },
 }
 

@@ -29,6 +29,15 @@ export default defineConfig({
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
+  server: {
+    proxy: {
+      "/api": {
+        target: "https://waptest.homsom.com",
+        changeOrigin: true,
+        secure: true,
+      },
+    },
+  },
   css: {
     preprocessorOptions: {
       less: {

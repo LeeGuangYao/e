@@ -57,7 +57,6 @@ const level = computed(() => {
   const pwd = props.password
   if (!pwd) return 0
 
-  const hasUpper = /[A-Z]/.test(pwd)
   const hasLower = /[a-z]/.test(pwd)
   const hasDigit = /\d/.test(pwd)
   const hasSpecial = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?`~]/.test(pwd)
@@ -65,8 +64,8 @@ const level = computed(() => {
   const isWeak = WEAK_PASSWORDS.includes(pwd.toLowerCase())
 
   if (isWeak) return 1
-  if (hasUpper && hasLower && hasDigit && hasSpecial && isLong) return 3
-  if (hasUpper && hasLower && hasDigit && (hasSpecial || isLong)) return 2
+  if (hasLower && hasDigit && hasSpecial && isLong) return 3
+  if (hasLower && hasDigit && (hasSpecial || isLong)) return 2
   return 1
 })
 

@@ -74,7 +74,7 @@ function hideLoadingToast(): void {
 }
 
 const service: AxiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || "/api",
+  baseURL: import.meta.env.VITE_API_BASE_URL || "",
   timeout: 30000,
   headers: {
     "Content-Type": "application/json",
@@ -94,7 +94,7 @@ service.interceptors.request.use(
 
     const userStore = useUserStore()
     if (userStore.token) {
-      config.headers.set("Authorization", `Bearer ${userStore.token}`)
+      config.headers.set("Token", userStore.token)
     }
 
     config.headers.set("LanguageType", String(userStore.language || "zh"))

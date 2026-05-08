@@ -140,7 +140,7 @@ src/
   ```
 
 - **拦截器职责**：
-  - **请求**：注入 `Authorization: Bearer token`、`LanguageType`、`CurrencyType`、`SoftwareVersion`、`RequestSource`、`BrowserUrl`
+  - **请求**：注入 `Token`、`LanguageType`、`CurrencyType`、`SoftwareVersion`、`RequestSource`、`BrowserUrl`
   - **响应**：成功时 `return ResultData`（调用层直接拿业务数据）；失败时 `message.error(ErrMsg)` + `Promise.reject`；统一错误码映射（如 101/102 → 登出、107 → 强制刷新、113 → 强制改密）
   - **错误**：取消重复请求时静默；网络错误 / 超时 / HTTP 状态码异常统一提示
   - **loading**：`showLoading: true` 时自动展示 / 隐藏 loading toast

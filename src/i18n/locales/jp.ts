@@ -28,7 +28,7 @@ const jp: LocaleMessages = {
     passwordPlaceholder: "パスワードを入力してください",
     passwordRequired: "パスワードを入力してください",
     passwordMinLength: "パスワードは8文字以上必要です",
-    passwordComplexity: "パスワードは大文字・小文字・数字を含む必要があります",
+    passwordComplexity: "パスワードは小文字・数字を含む必要があります",
     passwordWeak: "パスワードが弱すぎます",
     passwordStrengthWeak: "弱",
     passwordStrengthMedium: "中",
@@ -51,6 +51,10 @@ const jp: LocaleMessages = {
     profile: "プロフィール",
     logout: "ログアウト",
     changePassword: "パスワード変更",
+  },
+  home: {
+    title: "ホーム",
+    welcome: "ビジネストラベル管理プラットフォームへようこそ",
   },
 }
 

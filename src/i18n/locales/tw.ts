@@ -28,7 +28,7 @@ const tw: LocaleMessages = {
     passwordPlaceholder: "請輸入密碼",
     passwordRequired: "請輸入密碼",
     passwordMinLength: "密碼長度不能少於 8 位",
-    passwordComplexity: "密碼必須包含大小寫字母和數字",
+    passwordComplexity: "密碼必須包含小寫字母和數字",
     passwordWeak: "密碼強度過低",
     passwordStrengthWeak: "弱",
     passwordStrengthMedium: "中",
@@ -51,6 +51,10 @@ const tw: LocaleMessages = {
     profile: "個人中心",
     logout: "登出",
     changePassword: "修改密碼",
+  },
+  home: {
+    title: "首頁",
+    welcome: "歡迎使用商旅管理平台",
   },
 }
 

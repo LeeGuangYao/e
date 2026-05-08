@@ -94,7 +94,7 @@
           <a-button
             type="primary"
             html-type="submit"
-            :loading="loading"
+            :loading="props.loading"
             :disabled="!agreed"
             block
             size="large"
@@ -116,13 +116,16 @@ import { UserOutlined, LockOutlined, EyeOutlined, EyeInvisibleOutlined } from "@
 import { $t } from "@/i18n"
 import PasswordStrength from "./password-strength.vue"
 
+const props = defineProps<{
+  loading?: boolean
+}>()
+
 const emit = defineEmits<{
   submit: [values: { account: string; password: string }]
 }>()
 
 const formRef = ref<FormInstance>()
 const passwordInputRef = ref()
-const loading = ref(false)
 const passwordVisible = ref(false)
 const agreed = ref(false)
 
@@ -153,7 +156,7 @@ const validateAccount = async (_rule: Rule, value: string) => {
 const validatePassword = async (_rule: Rule, value: string) => {
   if (!value) return Promise.reject($t("login.passwordRequired"))
   if (value.length < 8) return Promise.reject($t("login.passwordMinLength"))
-  if (!/[A-Z]/.test(value) || !/[a-z]/.test(value) || !/\d/.test(value)) {
+  if (!/[a-z]/.test(value) || !/\d/.test(value)) {
     return Promise.reject($t("login.passwordComplexity"))
   }
   if (WEAK_PASSWORDS.includes(value.toLowerCase())) {
@@ -190,11 +193,7 @@ function handleForgotPassword() {}
 
 async function handleFinish(values: { account: string; password: string }) {
   if (!agreed.value) return
-  loading.value = true
-  setTimeout(() => {
-    loading.value = false
-    emit("submit", values)
-  }, 1500)
+  emit("submit", values)
 }
 </script>
 
