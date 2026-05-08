@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C /Users/liguangyao/Desktop/ai/e diff --stat architecture/project.md)",
+      "Bash(git -C /Users/liguangyao/Desktop/ai/e diff architecture/project.md)"
+    ]
+  }
+}

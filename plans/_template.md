@@ -1,0 +1,40 @@
+# Plan: <计划标题>
+
+- 状态：待执行 / 进行中 / 已完成
+- 对应 spec：`specs/YYYY-MM-DD-<topic>.md`
+- 日期：YYYY-MM-DD
+
+---
+
+## 总体思路
+
+一段话讲清楚总体方案，让人 30 秒理解。
+
+## 影响范围
+
+- 涉及文件 / 模块：
+- 是否影响 `architecture/project.md`：是 / 否（是 → 列出要改的章节）
+- 是否产生新的 ADR：是 / 否（是 → 说明决策点）
+
+## 实施步骤
+
+按顺序、可勾选。每一步要小到可以独立验证。
+
+- [ ] 1. ……
+- [ ] 2. ……
+- [ ] 3. ……
+
+## 风险与回滚
+
+- 可能出问题的点：
+- 回滚方法：
+
+## 完成后必做（归档与同步）
+
+按 `AGENTS.md` 第四章自动维护规则执行：
+
+- [ ] 本 plan 移动到 `plans/done/`
+- [ ] 对应 spec 移动到 `specs/done/`
+- [ ] 更新 `progress.md`（对应模块状态、链接到本 plan）
+- [ ] 如有架构改动 → 更新 `architecture/project.md`
+- [ ] 如有架构决策 → 新增 `decisions/NNNN-*.md` 并更新 `decisions/README.md`

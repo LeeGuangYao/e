@@ -1,0 +1,39 @@
+.flex-row() {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-column() {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-center() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between() {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pointer() {
+  cursor: pointer;
+}
+
+.ellipsis() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ellipsis-multi(@lines: 2) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: @lines;
+  -webkit-box-orient: vertical;
+}
