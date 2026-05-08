@@ -15,6 +15,7 @@
 - 移除 request 对象式调用，统一 HRequest → plans/done/2026-05-08-remove-request-object.md
 - 登录页面现代化重构 → plans/done/2026-05-08-login-page.md（左右分屏布局 + 品牌区 + 完整表单校验 + 密码强度条 + 响应式）
 - 登录调用接口 → plans/done/2026-05-08-login-api.md（hex_sha1 加密 Password + apiAuthLogin + Token 存储 + 请求头 Token + 首页路由）
+- 差旅首页设计与实现 → plans/done/2026-05-08-travel-homepage.md（全屏渐变背景 + 毛玻璃卡片 + 下划线式 Tab + 机票/酒店/火车票表单 + 城市搜索 + 互换动画 + 渐变搜索按钮）
 
 ## 🚧 进行中
 
