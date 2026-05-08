@@ -69,11 +69,22 @@ SV_ARGS=("$@")
 if [ "$HAS_COMMITS" = false ]; then
   SV_ARGS+=("--first-release")
 fi
-if ! pnpm exec standard-version "${SV_ARGS[@]}"; then
+if ! HUSKY=0 pnpm exec standard-version "${SV_ARGS[@]}"; then
   log_error "standard-version 执行失败"
   exit 1
 fi
 log_info "standard-version 完成"
+
+# 3.5 安全网：standard-version 完成后若仍有未提交改动，amend 到 release commit
+if [ -n "$(git status --porcelain)" ]; then
+  log_warn "检测到 standard-version 后仍有未提交改动，amend 到 release commit"
+  git add -A
+  git commit --amend --no-edit --no-verify
+  NEW_TAG=$(git tag --points-at HEAD | head -1)
+  if [ -n "$NEW_TAG" ]; then
+    git tag -f "$NEW_TAG" HEAD
+  fi
+fi
 
 # 4. 获取新版本号
 NEW_VERSION=$(node -p "require('./package.json').version")
