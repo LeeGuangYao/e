@@ -5,7 +5,7 @@ import type { SearchCityRequest, GetCityListResponse, SearchCityResponse } from 
 export function apiFlightGetCityList(): Promise<GetCityListResponse> {
   return HRequest<GetCityListResponse>({
     url: "/api/flight/getFlightCityList",
-    method: "GET",
+    method: "POST",
   })
 }
 
