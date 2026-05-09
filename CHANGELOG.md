@@ -1,4 +1,6 @@
 # 更新日志
+### [0.1.6](https://github.com/LeeGuangYao/e/compare/v0.1.5...v0.1.6) (2026-05-09)
+
 ### [0.1.5](https://github.com/LeeGuangYao/e/compare/v0.1.4...v0.1.5) (2026-05-08)
 
 ### [0.1.4](https://github.com/LeeGuangYao/e/compare/v0.1.3...v0.1.4) (2026-05-08)
