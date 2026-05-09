@@ -73,6 +73,10 @@ const jp: LocaleMessages = {
     checkOutDatePlaceholder: "チェックアウト日を選択",
     swapCity: "都市を入れ替え",
     noCityResult: "該当する都市が見つかりません",
+    hotCities: "人気都市",
+    recentCities: "最近選択",
+    citySearchPlaceholder: "都市名/コードを検索",
+    citySearchLoading: "検索中...",
   },
 }
 

@@ -73,6 +73,10 @@ const tw: LocaleMessages = {
     checkOutDatePlaceholder: "請選擇離店日期",
     swapCity: "交換城市",
     noCityResult: "未找到匹配城市",
+    hotCities: "熱門城市",
+    recentCities: "最近選擇",
+    citySearchPlaceholder: "搜尋城市名稱/三字碼",
+    citySearchLoading: "搜尋中...",
   },
 }
 

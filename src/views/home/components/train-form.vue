@@ -6,7 +6,6 @@
         <CCitySelect
           v-model="departureCity"
           :placeholder="$t('home.departureCityPlaceholder')"
-          :cities="cityList"
           @select="onDepartureSelect"
         />
       </div>
@@ -16,7 +15,6 @@
         <CCitySelect
           v-model="arrivalCity"
           :placeholder="$t('home.arrivalCityPlaceholder')"
-          :cities="cityList"
           @select="onArrivalSelect"
         />
       </div>
@@ -39,35 +37,12 @@
 import { ref } from "vue"
 import dayjs, { type Dayjs } from "dayjs"
 import CCitySelect from "@/components/home/c-city-select.vue"
-import type { CityItem } from "@/components/home/c-city-select.vue"
+import type { CityItem } from "@/types/city"
 import CCitySwap from "@/components/home/c-city-swap.vue"
 
 const departureCity = ref("")
 const arrivalCity = ref("")
 const departureDate = ref<Dayjs | null>(null)
-
-const cityList = ref<CityItem[]>([
-  { name: "北京", code: "BJP" },
-  { name: "上海", code: "SHH" },
-  { name: "广州", code: "GZQ" },
-  { name: "深圳", code: "SZQ" },
-  { name: "成都", code: "CDW" },
-  { name: "杭州", code: "HZH" },
-  { name: "武汉", code: "WHN" },
-  { name: "西安", code: "XAY" },
-  { name: "重庆", code: "CQW" },
-  { name: "南京", code: "NJH" },
-  { name: "长沙", code: "CSQ" },
-  { name: "青岛", code: "QDK" },
-  { name: "厦门", code: "XMS" },
-  { name: "昆明", code: "KMM" },
-  { name: "大连", code: "DLT" },
-  { name: "天津", code: "TJP" },
-  { name: "郑州", code: "ZZF" },
-  { name: "三亚", code: "SYQ" },
-  { name: "哈尔滨", code: "HBB" },
-  { name: "贵阳", code: "GIW" },
-])
 
 function onSwap() {
   const temp = departureCity.value

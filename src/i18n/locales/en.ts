@@ -73,6 +73,10 @@ const en: LocaleMessages = {
     checkOutDatePlaceholder: "Select check-out date",
     swapCity: "Swap cities",
     noCityResult: "No matching city found",
+    hotCities: "Popular",
+    recentCities: "Recent",
+    citySearchPlaceholder: "Search city name / code",
+    citySearchLoading: "Searching...",
   },
 }
 

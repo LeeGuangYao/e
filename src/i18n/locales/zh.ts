@@ -71,6 +71,10 @@ const zh = {
     checkOutDatePlaceholder: "请选择离店日期",
     swapCity: "交换城市",
     noCityResult: "未找到匹配城市",
+    hotCities: "热门城市",
+    recentCities: "最近选择",
+    citySearchPlaceholder: "搜索城市名称/三字码",
+    citySearchLoading: "搜索中...",
   },
 }
 
